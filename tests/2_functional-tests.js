@@ -106,7 +106,7 @@ suite('Functional Tests', function() {
         })
         .end(function(err, res){
           assert.equal(res.status, 400);
-          assert.equal(res.text, 'missing required fields');
+          assert.equal(res.text, 'missing inputs');
           done();
         });
       });

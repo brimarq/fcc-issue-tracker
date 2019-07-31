@@ -44,7 +44,7 @@ module.exports = function (app) {
       const { issue_title, issue_text, created_by, assigned_to, status_text } = req.body;
       let newIssue;
 
-      if (!issue_title || !issue_text || !created_by) return res.status(400).send('missing required fields'); 
+      if (!issue_title || !issue_text || !created_by) return res.status(400).send('missing inputs'); 
       
       newIssue = new Issue({ issue_title, issue_text, created_by, assigned_to, status_text, project });
       newIssue.save((err, issue) => {
