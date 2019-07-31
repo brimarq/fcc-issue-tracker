@@ -4,7 +4,7 @@ const express = require('express');
 // const bodyParser = require('body-parser');
 // const expect = require('chai').expect;
 const cors = require('cors');
-
+const helmet = require('helmet');
 const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
 const glitchDeployRoute = require('./routes/glitch-deploy');
@@ -19,6 +19,8 @@ const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: false });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.use(helmet.xssFilter());
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
