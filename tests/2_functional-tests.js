@@ -166,15 +166,17 @@ suite('Functional Tests', function() {
         .end(function(err, res){
           assert.equal(res.status, 200);
           assert.isArray(res.body);
-          assert.property(res.body[0], '_id');
-          assert.property(res.body[0], 'issue_title');
-          assert.property(res.body[0], 'issue_text');
-          assert.property(res.body[0], 'created_by');
-          assert.property(res.body[0], 'assigned_to');
-          assert.property(res.body[0], 'status_text');
-          assert.property(res.body[0], 'open');
-          assert.property(res.body[0], 'created_on');
-          assert.property(res.body[0], 'updated_on');
+          if (res.body.length) {
+            assert.property(res.body[0], '_id');
+            assert.property(res.body[0], 'issue_title');
+            assert.property(res.body[0], 'issue_text');
+            assert.property(res.body[0], 'created_by');
+            assert.property(res.body[0], 'assigned_to');
+            assert.property(res.body[0], 'status_text');
+            assert.property(res.body[0], 'open');
+            assert.property(res.body[0], 'created_on');
+            assert.property(res.body[0], 'updated_on');
+          }
           done();
         });
       });
@@ -186,15 +188,17 @@ suite('Functional Tests', function() {
         .end(function(err, res){
           assert.equal(res.status, 200);
           assert.isArray(res.body);
-          assert.property(res.body[0], '_id');
-          assert.property(res.body[0], 'issue_title');
-          assert.property(res.body[0], 'issue_text');
-          assert.property(res.body[0], 'created_by');
-          assert.property(res.body[0], 'assigned_to');
-          assert.property(res.body[0], 'status_text');
-          assert.property(res.body[0], 'open');
-          assert.property(res.body[0], 'created_on');
-          assert.property(res.body[0], 'updated_on');
+          if (res.body.length) {
+            assert.property(res.body[0], '_id');
+            assert.property(res.body[0], 'issue_title');
+            assert.property(res.body[0], 'issue_text');
+            assert.property(res.body[0], 'created_by');
+            assert.property(res.body[0], 'assigned_to');
+            assert.property(res.body[0], 'status_text');
+            assert.property(res.body[0], 'open');
+            assert.property(res.body[0], 'created_on');
+            assert.property(res.body[0], 'updated_on');
+          }
           done();
         });
       });
@@ -206,15 +210,17 @@ suite('Functional Tests', function() {
         .end(function(err, res){
           assert.equal(res.status, 200);
           assert.isArray(res.body);
-          assert.property(res.body[0], '_id');
-          assert.property(res.body[0], 'issue_title');
-          assert.property(res.body[0], 'issue_text');
-          assert.property(res.body[0], 'created_by');
-          assert.property(res.body[0], 'assigned_to');
-          assert.property(res.body[0], 'status_text');
-          assert.property(res.body[0], 'open');
-          assert.property(res.body[0], 'created_on');
-          assert.property(res.body[0], 'updated_on');
+          if (res.body.length) {
+            assert.property(res.body[0], '_id');
+            assert.property(res.body[0], 'issue_title');
+            assert.property(res.body[0], 'issue_text');
+            assert.property(res.body[0], 'created_by');
+            assert.property(res.body[0], 'assigned_to');
+            assert.property(res.body[0], 'status_text');
+            assert.property(res.body[0], 'open');
+            assert.property(res.body[0], 'created_on');
+            assert.property(res.body[0], 'updated_on');
+          }
           done();
         });
       });
@@ -240,11 +246,11 @@ suite('Functional Tests', function() {
         chai.request(server)
         .delete('/api/issues/test')
         .send({
-          _id: testId1
+          _id: testId2
         })
         .end(function(err, res){
           assert.equal(res.status, 200);
-          assert.equal(res.text, `deleted ${testId1}`);
+          assert.equal(res.text, `deleted ${testId2}`);
           done();
         });
       });
