@@ -1,16 +1,24 @@
 'use strict';
 require('dotenv').config();
 const express = require('express');
-const glitchDeployRoute = require('./routes/glitch-deploy');
 // const bodyParser = require('body-parser');
 // const expect = require('chai').expect;
 const cors = require('cors');
 
 const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
+const glitchDeployRoute = require('./routes/glitch-deploy');
 const runner = require('./test-runner');
 
+
 const app = express();
+
+// Set up mongoose connection
+const mongoose = require('mongoose');
+const mongoDB = process.env.MONGODB_URI;
+mongoose.connect(mongoDB, { useNewUrlParser: true, useFindAndModify: false });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
@@ -20,7 +28,7 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 //Sample front-end
 app.route('/:project/')
