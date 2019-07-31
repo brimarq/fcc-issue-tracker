@@ -105,7 +105,7 @@ suite('Functional Tests', function() {
           status_text: 'In QA'
         })
         .end(function(err, res){
-          assert.equal(res.status, 400);
+          assert.equal(res.status, 200);
           assert.equal(res.text, 'missing inputs');
           done();
         });
@@ -120,7 +120,7 @@ suite('Functional Tests', function() {
         .put('/api/issues/test')
         .send()
         .end(function(err, res){
-          assert.equal(res.status, 400);
+          assert.equal(res.status, 200);
           assert.equal(res.text, 'no updated field sent');
           done();
         });
@@ -233,7 +233,7 @@ suite('Functional Tests', function() {
           _id: ''
         })
         .end(function(err, res){
-          assert.equal(res.status, 400);
+          assert.equal(res.status, 200);
           assert.equal(res.text, '_id error');
           done();
         });

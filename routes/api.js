@@ -44,7 +44,7 @@ module.exports = function (app) {
       const { issue_title, issue_text, created_by, assigned_to, status_text } = req.body;
       let newIssue;
 
-      if (!issue_title || !issue_text || !created_by) return res.status(400).send('missing inputs'); 
+      if (!issue_title || !issue_text || !created_by) return res.send('missing inputs'); 
       
       newIssue = new Issue({ issue_title, issue_text, created_by, assigned_to, status_text, project });
       newIssue.save((err, issue) => {
@@ -57,12 +57,12 @@ module.exports = function (app) {
       const isEmptyObj = (obj) => (Object.keys(obj).length ? false : true);
       const {_id, ...update} = req.body;
 
-      if (isEmptyObj(req.body) || isEmptyObj(update)) return res.status(400).send('no updated field sent');
+      if (isEmptyObj(req.body) || isEmptyObj(update)) return res.send('no updated field sent');
 
-      if (!_id) return res.status(400).send('_id error');
+      if (!_id) return res.send('_id error');
 
       Issue.findOneAndUpdate({_id: {$eq: _id}}, update, {new: true}, (err, issue) => {
-        if (err) res.status(500).send(`could not update ${_id}`);
+        if (err) res.send(`could not update ${_id}`);
         if (issue) res.send('successfully updated'); 
       });
       
@@ -71,10 +71,10 @@ module.exports = function (app) {
     .delete(function (req, res){
       const _id = req.body._id;
 
-      if (!_id) return res.status(400).send('_id error');
+      if (!_id) return res.send('_id error');
 
       Issue.findOneAndDelete({_id: {$eq: _id}}, (err, issue) => {
-        if (err) res.status(500).send(`could not delete ${_id}`); 
+        if (err) res.send(`could not delete ${_id}`); 
         if (issue) res.send(`deleted ${_id}`); 
       });
       
